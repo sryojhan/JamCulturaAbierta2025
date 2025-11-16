@@ -10,12 +10,18 @@ public class Actor : MonoBehaviour
 
     private void Awake()
     {
-        sprRenderer = GetComponent<SpriteRenderer>();
+        sprRenderer = GetComponentInChildren<SpriteRenderer>();
 
         EventBus.Subscribe<TheatrePlayer.Events.OnDialogueLineBegin>(evt => OnNewDialogue(evt.line));
         EventBus.Subscribe<TheatrePlayer.Events.OnDialogueLineEnd>(evt => OnEndDialogue(evt.line));
         EventBus.Subscribe<MoveEvent>(Move);
     }
+
+    private void Start()
+    {
+        StageManager.instance.RegisterActor(this);
+    }
+
 
     private void OnNewDialogue(DialogueLine line)
     {   
@@ -32,7 +38,7 @@ public class Actor : MonoBehaviour
     {
         if (evt.actorName != name) return;
 
-        evt.movementInterpolation.MoveAtConstantPace(this, transform, StageManager.instance.CalculatePosition(evt.position));
+        evt.movementInterpolation.MoveAtConstantPace(this, transform, StageManager.instance.CalculatePosition(evt.position), local: false);
     }
 
 }

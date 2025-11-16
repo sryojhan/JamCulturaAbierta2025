@@ -31,10 +31,16 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
     {
         dialogueLayout = dialogue.GetOrAddComponent<LayoutElement>();
 
-        StartCoroutine(BeginPlay());
+        BeginPlay();
     }
 
-    private IEnumerator BeginPlay()
+    void BeginPlay()
+    {
+        StartCoroutine(TheatreTimeline());
+    }
+
+
+    private IEnumerator TheatreTimeline()
     {
         foreach (TimelineEvent evt in theatrePlay.events)
         {
@@ -73,6 +79,10 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
         dialogue.text = "";
 
         dialogueAudio.clip = null;
+
+
+        yield return new WaitForSeconds(5);
+
     }
 
 

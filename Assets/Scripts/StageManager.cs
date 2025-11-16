@@ -14,11 +14,24 @@ public class StageManager : Singleton<StageManager>
 
     public void RegisterActor(Actor actor)
     {
-        actors.Add(actor.name, actor);
+        actors.Add(actor.Name, actor);
     }
 
-    public Vector2 CalculatePosition(float i)
+    public Vector3 CalculatePosition(float i)
     {
-        return Vector2.Lerp(leftPosition.localPosition, rightPosition.localPosition, i);
+        return Vector3.Lerp(leftPosition.position, rightPosition.position, i);
     }
+    public float CalculateRelativePosition(Vector3 position)
+    {
+        float xDiff = rightPosition.position.x - leftPosition.position.x;
+        float xPositionUnclamped = position.x - leftPosition.position.x;
+
+        return xPositionUnclamped / xDiff;
+    }
+
+    public Actor GetActor(string name)
+    {
+        return actors[name];
+    }
+
 }

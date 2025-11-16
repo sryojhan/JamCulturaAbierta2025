@@ -1,8 +1,9 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Theatre/Dialogue line")]
-public class DialogueLine : ScriptableObject
+public class DialogueLine : TimelineEvent
 {
+    [Header("Dialogue settings")]
     public string speaker;
     [TextArea]
     public string dialogue;

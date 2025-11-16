@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4494c2a471e1c8e4181f4d7c4ec13de2, type: 3}
   m_Name: Placeholder
   m_EditorClassIdentifier: Assembly-CSharp::Play
-  lines:
+  events:
   - {fileID: 11400000, guid: 7b224b7e6763ee2429be0816dc090ca7, type: 2}
   - {fileID: 11400000, guid: 8cf4e66113c268245ad9c72dd0959d46, type: 2}
+  - {fileID: 11400000, guid: a67a3c42d19a6774fa13b3041665a3dd, type: 2}
   - {fileID: 11400000, guid: f88fd57bb29aba341afab318daef62a1, type: 2}
   - {fileID: 11400000, guid: aeec086bb7a396942906b0f2965dc387, type: 2}
   - {fileID: 11400000, guid: 54de7e1f709e92342857a4894faf6947, type: 2}

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class TheatrePlayer : MonoBehaviour
+public class TheatrePlayer : Singleton<TheatrePlayer>
 {
     [Header("References")]
 
@@ -21,7 +21,7 @@ public class TheatrePlayer : MonoBehaviour
     [Header("Configuration")]
 
     [SerializeField]
-    private Play currentLevelPlay;
+    private Play theatrePlay;
 
     [SerializeField]
     private RectTransform maxTextWidth;
@@ -31,31 +31,40 @@ public class TheatrePlayer : MonoBehaviour
     {
         dialogueLayout = dialogue.GetOrAddComponent<LayoutElement>();
 
-        StartCoroutine(Play());
+        StartCoroutine(BeginPlay());
     }
 
-    private IEnumerator Play()
+    private IEnumerator BeginPlay()
     {
-        foreach(DialogueLine line in currentLevelPlay.lines)
+        foreach (TimelineEvent evt in theatrePlay.events)
         {
-            speaker.text = line.speaker;
-            dialogue.text = line.dialogue;
-
-            dialogueLayout.preferredWidth = -1;
-
-            Canvas.ForceUpdateCanvases();
-
-            float width = dialogue.rectTransform.rect.width;
-            float maxWidth = maxTextWidth.rect.width;
-
-            dialogueLayout.preferredWidth = width > maxWidth ? maxWidth : -1;
-
-            dialogueAudio.clip = line.clip;
-            dialogueAudio.Play();
-
-            while (dialogueAudio.isPlaying)
+            if (evt is DialogueLine line)
             {
-                yield return null;
+                speaker.text = line.speaker;
+                dialogue.text = line.dialogue;
+
+                dialogueLayout.preferredWidth = -1;
+
+                Canvas.ForceUpdateCanvases();
+
+                float width = dialogue.rectTransform.rect.width;
+                float maxWidth = maxTextWidth.rect.width;
+
+
+                dialogueLayout.preferredWidth = width > maxWidth ? maxWidth : -1;
+
+                dialogueAudio.clip = line.clip;
+                dialogueAudio.Play();
+
+                EventBus.Raise(new Events.OnDialogueLineBegin() { line = line });
+
+                while (dialogueAudio.isPlaying)
+                {
+                    yield return null;
+                }
+
+                EventBus.Raise(new Events.OnDialogueLineEnd() { line = line });
+
             }
         }
 
@@ -65,5 +74,13 @@ public class TheatrePlayer : MonoBehaviour
         dialogueAudio.clip = null;
     }
 
+
+    public static class Events
+    {
+        public class DialogueChangeEvent { public DialogueLine line; }
+
+        public class OnDialogueLineBegin : DialogueChangeEvent { }
+        public class OnDialogueLineEnd : DialogueChangeEvent { }
+    }
 
 }

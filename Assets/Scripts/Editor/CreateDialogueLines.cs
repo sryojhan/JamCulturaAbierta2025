@@ -8,10 +8,10 @@ public class CreateDialogueLines
     public static void Generate()
     {
         // Carpeta donde guardar los SO
-        string outputFolder = "Assets/05_TheatrePlays";
+        string outputFolder = "Assets/Theatre data";
 
         if (!AssetDatabase.IsValidFolder(outputFolder))
-            AssetDatabase.CreateFolder("Assets", "05_TheatrePlays");
+            AssetDatabase.CreateFolder("Assets", "Theatre data");
 
         // Recorremos solo la selección
         foreach (var obj in Selection.objects)

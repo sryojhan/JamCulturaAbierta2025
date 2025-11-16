@@ -14,18 +14,25 @@ public class Actor : MonoBehaviour
 
         EventBus.Subscribe<TheatrePlayer.Events.OnDialogueLineBegin>(evt => OnNewDialogue(evt.line));
         EventBus.Subscribe<TheatrePlayer.Events.OnDialogueLineEnd>(evt => OnEndDialogue(evt.line));
+        EventBus.Subscribe<MoveEvent>(Move);
     }
 
-
-
     private void OnNewDialogue(DialogueLine line)
-    {
+    {   
         if(line.speaker == name)
             sprRenderer.color = Color.blue;
     }
 
-    private void OnEndDialogue(DialogueLine line)
+    private void OnEndDialogue(DialogueLine _)
     {
         sprRenderer.color = Color.white;
     }
+
+    public void Move(MoveEvent evt)
+    {
+        if (evt.actorName != name) return;
+
+        evt.movementInterpolation.MoveAtConstantPace(this, transform, StageManager.instance.CalculatePosition(evt.position));
+    }
+
 }

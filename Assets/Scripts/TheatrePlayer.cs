@@ -66,6 +66,7 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
                 EventBus.Raise(new Events.OnDialogueLineEnd() { line = line });
 
             }
+            else evt.Execute();
         }
 
         speaker.text = "";

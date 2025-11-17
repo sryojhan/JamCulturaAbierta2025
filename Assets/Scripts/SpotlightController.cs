@@ -45,7 +45,7 @@ public class SpotlightController : MonoBehaviour
         transform.Rotate(0, 0, angleDiff);
 
         angleDiff = Mathf.Clamp(angleDiff, -maxStep, maxStep);
-        spotlight.RotateLight(angleDiff * rotationPower * 0.001f);
+        spotlight.RotateLight(angleDiff * rotationPower * -0.001f);
 
         previousAngle = angle;
     }

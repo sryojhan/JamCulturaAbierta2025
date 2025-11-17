@@ -26,12 +26,20 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
     [SerializeField]
     private RectTransform maxTextWidth;
 
+    [SerializeField]
+    private float initialDelay = 3;
+
+    private void Awake()
+    {
+        EventBus.Subscribe<TimelineEvent>(ProcessEvent);
+    }
 
     private void Start()
     {
         dialogueLayout = dialogue.GetOrAddComponent<LayoutElement>();
 
         BeginPlay();
+
     }
 
     void BeginPlay()
@@ -42,8 +50,17 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
 
     private IEnumerator TheatreTimeline()
     {
+        yield return new WaitForSeconds(initialDelay);
+
         foreach (TimelineEvent evt in theatrePlay.events)
         {
+            if (evt.delayTime > 0)
+            {
+                EventBus.RaiseAfterSeconds(evt.delayTime, evt);
+                continue;
+            }
+
+
             if (evt is DialogueLine line)
             {
                 speaker.text = line.speaker;
@@ -85,6 +102,10 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
 
     }
 
+    void ProcessEvent(TimelineEvent evt)
+    {
+        evt.Execute();
+    }
 
     public static class Events
     {

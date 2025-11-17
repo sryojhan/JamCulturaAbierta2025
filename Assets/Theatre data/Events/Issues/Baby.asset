@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d348384965c906a43a6cd3e9cc143403, type: 3}
+  m_Name: Baby
+  m_EditorClassIdentifier: Assembly-CSharp::IssueEvent
+  delayTime: 1
+  blockProgress: 0
+  Message: "Hay un beb\xE9 llorando en la sala. La madre te suplica que porfavor
+    hagas la vista gorda por una vez, que es una obra que llevaba a\xF1os queriendo
+    ver y no ha encontrado donde dejar al beb\xE9"
+  requirement: 
+  multipleSelection:
+  - optionMessage: Expulsar de la sala
+    resourcesUpdates: []
+    consequence: Baby
+  - optionMessage: Permitir que se quede
+    resourcesUpdates: []
+    consequence: 

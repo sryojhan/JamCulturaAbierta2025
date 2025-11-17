@@ -72,6 +72,11 @@ public class Spotlight : MonoBehaviour
     }
 
 
+    private void FixedUpdate()
+    {
+        
+    }
+
     void OnActorBeginSpeaking(string actor)
     {
         targetActor = actor;

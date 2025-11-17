@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d348384965c906a43a6cd3e9cc143403, type: 3}
+  m_Name: Contrato
+  m_EditorClassIdentifier: Assembly-CSharp::EmailData
+  delayTime: 0
+  blockProgress: 0
+  subject: Candidatura trabajo
+  senderEmail: mireia@email.com
+  message: "Hola, \nEspero que este correo te llegue correctamente. Mi nombre es
+    Mireia Escobar Gracia. Te escribo porque he visto la oferta de trabajo publicada
+    en linkedin y creo que soy la persona adecuada para la posici\xF3n.\n\nAdjunto
+    a este correo mi CV actualizado y estar\xEDa encantada de poder hablar m\xE1s
+    sobre el puesto en una entrevista\nMuchas gracias.\nMireia"
+  requirement: 
+  responses:
+  - optionMessage: ok
+    resourcesUpdates: []
+    consequence: 
+  - optionMessage: Lo sentimos...
+    resourcesUpdates: []
+    consequence: 
+  - optionMessage: Ya te llamaremos
+    resourcesUpdates: []
+    consequence: 

@@ -1,15 +1,17 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Theatre/Events/Issue event")]
-public class IssueEvent : TimelineEvent
+[CreateAssetMenu(menuName = "Theatre/Events/Email data")]
+public class EmailData : TimelineEvent
 {
-    [Header("Issue data")]
+    [Header("Email data")]
+    public string subject;
+    public string senderEmail;
     [TextArea]
-    public string Message;
+    public string message;
 
     [Serializable]
-    public struct Selection
+    public struct Response
     {
         public string optionMessage;
 
@@ -29,11 +31,11 @@ public class IssueEvent : TimelineEvent
     }
 
     public string requirement;
-    public Selection[] multipleSelection;
+    public Response[] responses;
 
     public override void Execute()
     {
         if(ResourcesManager.instance.IsUnlocked(requirement))
-            IssueTracker.instance.ScriptableIssue(this);
+            EmailTracker.instance.ScriptableIssue(this);
     }
 }

@@ -54,15 +54,13 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
 
         foreach (TimelineEvent evt in theatrePlay.events)
         {
-            if (evt.delayTime > 0)
-            {
-                EventBus.RaiseAfterSeconds(evt.delayTime, evt);
-                continue;
-            }
-
-
             if (evt is DialogueLine line)
             {
+                if (evt.delayTime > 0)
+                {
+                    yield return new WaitForSeconds(evt.delayTime);
+                }
+
                 speaker.text = line.speaker;
                 dialogue.text = line.dialogue;
 
@@ -89,7 +87,13 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
                 EventBus.Raise(new Events.OnDialogueLineEnd() { line = line });
 
             }
-            else evt.Execute();
+            else
+            {
+                if(evt.delayTime > 0)
+                    EventBus.RaiseAfterSeconds(evt.delayTime, evt);
+                else 
+                    evt.Execute();
+            }
         }
 
         speaker.text = "";

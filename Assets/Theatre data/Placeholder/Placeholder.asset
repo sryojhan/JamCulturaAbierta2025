@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Play
   events:
   - {fileID: 11400000, guid: 7b224b7e6763ee2429be0816dc090ca7, type: 2}
+  - {fileID: 11400000, guid: 7ec7d7bb2e245004f99e546f9aab145c, type: 2}
+  - {fileID: 11400000, guid: 7ec7d7bb2e245004f99e546f9aab145c, type: 2}
   - {fileID: 11400000, guid: 0c3cb8f477b5174409bfd04b7f2ce0e2, type: 2}
+  - {fileID: 11400000, guid: 7ec7d7bb2e245004f99e546f9aab145c, type: 2}
   - {fileID: 11400000, guid: 8cf4e66113c268245ad9c72dd0959d46, type: 2}
   - {fileID: 11400000, guid: 70728d8ee3d6f234d81134b8ecf7825c, type: 2}
   - {fileID: 11400000, guid: e8429be7eddddbc42be9a01197ebf7cf, type: 2}

@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 
-[RequireComponent(typeof(ClickableElement))]
 public class EmailTracker : Singleton<EmailTracker>
 {
     [Header("References")]
@@ -19,18 +18,25 @@ public class EmailTracker : Singleton<EmailTracker>
     [SerializeField]
     private EmailData[] spawningIssues;
 
-    private readonly Queue<EmailWindow> pendingIssues = new();
+    private readonly List<EmailWindow> pendingIssues = new();
 
-    public void ScriptableIssue(EmailData data)
+    public void CreateEmail(EmailData data)
     {
         GameObject windowGO = Instantiate(emailPrefab, emailParent);
         EmailWindow window = windowGO.GetComponent<EmailWindow>();
         window.emailData = data;
 
-        pendingIssues.Enqueue(window);
+        pendingIssues.Add(window);
 
         UpdateCount();
     }
+
+    public void OnWindowClosed(EmailWindow window)
+    {
+        pendingIssues.Remove(window);
+        UpdateCount();
+    }
+
 
     private void Start()
     {
@@ -46,4 +52,5 @@ public class EmailTracker : Singleton<EmailTracker>
 
         emailCount.text = countMessage;
     }
+
 }

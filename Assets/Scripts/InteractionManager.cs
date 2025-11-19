@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InteractionManager : MonoBehaviour
+public class InteractionManager : Singleton<InteractionManager>
 {
     ClickableElement interactableElement;
 
@@ -9,8 +9,12 @@ public class InteractionManager : MonoBehaviour
 
     bool wasHeldLastFrame;
 
+    bool inputEnabled = true;
+
     private void Update()
     {
+        if (!inputEnabled) return;
+
         if (isClickDownInsideClickable)
         {
             if(ManageHold())
@@ -114,5 +118,16 @@ public class InteractionManager : MonoBehaviour
         }
 
         return canBeHeld;
+    }
+
+
+    public void DisableInput()
+    {
+        inputEnabled = false;
+    }
+
+    public void EnableInput()
+    {
+        inputEnabled = true;
     }
 }

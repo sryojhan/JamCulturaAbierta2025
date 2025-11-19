@@ -57,6 +57,12 @@ public class EmailWindow : MonoBehaviour, IBeginDragHandler, IDragHandler
 
             buttons[i].text = emailData.responses[i].optionMessage;
         }
+
+        if(emailData.responses.Length == 0)
+        {
+            buttons[0].transform.parent.gameObject.SetActive(true);
+            buttons[0].text = "cerrar";
+        }
     }
 
 
@@ -73,6 +79,7 @@ public class EmailWindow : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     public void PressButton(int idx)
     {
+
         print(emailData.responses[idx].optionMessage);
 
         Destroy(gameObject);

@@ -61,5 +61,4 @@ public class ResourcesManager : Singleton<ResourcesManager>
 
         return requirements.Contains(requirement);
     }
-
 }

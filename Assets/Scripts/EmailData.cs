@@ -36,6 +36,6 @@ public class EmailData : TimelineEvent
     public override void Execute()
     {
         if(ResourcesManager.instance.IsUnlocked(requirement))
-            EmailTracker.instance.ScriptableIssue(this);
+            EmailTracker.instance.CreateEmail(this);
     }
 }

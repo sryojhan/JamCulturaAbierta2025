@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-
 public class ClickableElement : MonoBehaviour
 {
     public UnityEvent onHoverBegin;
@@ -20,6 +19,9 @@ public class ClickableElement : MonoBehaviour
 
     private void Start()
     {
+        if (!GetComponent<Collider2D>())
+            throw new UnityException($"Clickable object {gameObject.name} doesnt have a collider");
+
         onHoverBegin.AddListener(OnHoverBegin);
         onHoverEnd.AddListener(OnHoverEnd);
     }

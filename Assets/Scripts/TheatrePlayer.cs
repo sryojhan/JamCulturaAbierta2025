@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class TheatrePlayer : Singleton<TheatrePlayer>
 {
     [Header("References")]
-
     [SerializeField]
     private AudioSource dialogueAudio;
 
@@ -38,11 +37,14 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
     {
         dialogueLayout = dialogue.GetOrAddComponent<LayoutElement>();
 
-        BeginPlay();
+        speaker.text = "";
+        dialogue.text = "";
+
+        dialogueAudio.clip = null;
 
     }
 
-    void BeginPlay()
+    public void BeginPlay()
     {
         StartCoroutine(TheatreTimeline());
     }
@@ -104,6 +106,7 @@ public class TheatrePlayer : Singleton<TheatrePlayer>
 
         yield return new WaitForSeconds(5);
 
+        GameResultScreen.instance.BeginEndScreen();
     }
 
     void ProcessEvent(TimelineEvent evt)

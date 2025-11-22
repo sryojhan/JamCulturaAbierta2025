@@ -79,8 +79,8 @@ public class EmailWindow : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     public void PressButton(int idx)
     {
-
-        print(emailData.responses[idx].optionMessage);
+        if(emailData.responses.Length > 0)
+            print(emailData.responses[idx].optionMessage);
 
         Destroy(gameObject);
     }
